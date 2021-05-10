@@ -1,5 +1,5 @@
 {
   "MediaFormat": "application/json",
-  "HttpEncoding": "UTF8"
+  "HttpEncoding": "utf-8"
 }
 

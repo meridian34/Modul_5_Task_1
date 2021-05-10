@@ -10,7 +10,7 @@ namespace Modul_5_Task_1.Models.DTO
     public class User
     {
         [JsonProperty("id")]
-        public int Id { get; set; }
+        public int? Id { get; set; }
         [JsonProperty("email")]
         public string Email { get; set; }
         [JsonProperty("first_name")]
@@ -22,8 +22,8 @@ namespace Modul_5_Task_1.Models.DTO
         [JsonProperty("job")]
         public string Job { get; set; }
         [JsonProperty("updatedAt")]
-        public TimeSpan UpdatedAt { get; set; }
+        public TimeSpan? UpdatedAt { get; set; }
         [JsonProperty("createdAt")]
-        public TimeSpan CreatedAt { get; set; }
+        public TimeSpan? CreatedAt { get; set; }
     }
 }

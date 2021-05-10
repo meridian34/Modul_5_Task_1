@@ -9,11 +9,11 @@ namespace Modul_5_Task_1.Services.Interfaces
 {
     public interface IHttpClientService
     {
-        public Task<HttpResponseMessage> SendAsync(string uri, HttpMethod httpMethod, string httpContentText = null);
-        public Task<HttpResponseMessage> GetAsync(string uri);
-        public Task<HttpResponseMessage> PostAsync(string uri, string httpContent);
-        public Task<HttpResponseMessage> PutAsync(string uri, string httpContent);
-        public Task<HttpResponseMessage> PatchAsync(string uri, string httpContent);
-        public Task<HttpResponseMessage> DeleteAsync(string uri);
+        public Task<HttpResponseMessage> SendAsync(string request, HttpMethod httpMethod, string serializedСontent = null);
+        public Task<HttpResponseMessage> GetAsync(string request);
+        public Task<HttpResponseMessage> PostAsync(string request, string serializedСontent);
+        public Task<HttpResponseMessage> PutAsync(string request, string serializedСontent);
+        public Task<HttpResponseMessage> PatchAsync(string request, string serializedСontent);
+        public Task<HttpResponseMessage> DeleteAsync(string request);
     }
 }

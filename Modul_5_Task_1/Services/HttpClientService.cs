@@ -24,14 +24,14 @@ namespace Modul_5_Task_1.Services
             _mediaFormat = mediaFormat;
             _httpEncoding = Encoding.GetEncoding(httpEncoding);
         }
-        public async Task<HttpResponseMessage> SendAsync(string uri, HttpMethod httpMethod, string httpContentText = null)
+        public async Task<HttpResponseMessage> SendAsync(string request, HttpMethod httpMethod, string serializedСontent = null)
         {
             var httpMessage = new HttpRequestMessage();
-            httpMessage.RequestUri = new Uri(uri);
+            httpMessage.RequestUri = new Uri(request);
             httpMessage.Method = httpMethod;
-            if (httpContentText != null)
+            if (serializedСontent != null)
             {
-                var httpContent = new StringContent(httpContentText, _httpEncoding, _mediaFormat);
+                var httpContent = new StringContent(serializedСontent, _httpEncoding, _mediaFormat);
                 httpMessage.Content = httpContent;
             }
             using(var httpClient = new HttpClient())
@@ -40,25 +40,25 @@ namespace Modul_5_Task_1.Services
             }            
         }
        
-        public async Task<HttpResponseMessage> GetAsync(string uri)
+        public async Task<HttpResponseMessage> GetAsync(string request)
         {
-            return await SendAsync(uri, HttpMethod.Get);
+            return await SendAsync(request, HttpMethod.Get);
         }
-        public async Task<HttpResponseMessage> PostAsync(string uri, string httpContent)
+        public async Task<HttpResponseMessage> PostAsync(string request, string serializedСontent)
         {
-            return await SendAsync(uri, HttpMethod.Post, httpContent);
+            return await SendAsync(request, HttpMethod.Post, serializedСontent);
         }
-        public async Task<HttpResponseMessage> PutAsync(string uri, string httpContent)
+        public async Task<HttpResponseMessage> PutAsync(string request, string serializedСontent)
         {
-            return await SendAsync(uri, HttpMethod.Put, httpContent);
+            return await SendAsync(request, HttpMethod.Put, serializedСontent);
         }
-        public async Task<HttpResponseMessage> PatchAsync(string uri, string httpContent)
+        public async Task<HttpResponseMessage> PatchAsync(string request, string serializedСontent)
         {
-            return await SendAsync(uri, HttpMethod.Patch, httpContent);
+            return await SendAsync(request, HttpMethod.Patch, serializedСontent);
         }
-        public async Task<HttpResponseMessage> DeleteAsync(string uri)
+        public async Task<HttpResponseMessage> DeleteAsync(string request)
         {
-            return await SendAsync(uri, HttpMethod.Delete);
+            return await SendAsync(request, HttpMethod.Delete);
         }
     }
 }
