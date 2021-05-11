@@ -11,7 +11,8 @@ namespace Modul_5_Task_1
     {
         static async Task Main(string[] args)
         {
-            
+            var s = new Starter();
+            await s.Start();
         }
     }
 }

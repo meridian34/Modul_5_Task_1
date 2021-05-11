@@ -20,21 +20,23 @@ namespace Modul_5_Task_1.Extensions
         {
             
             HttpResponseMessage result;
-            
-            if(dto is null)
+            var serializer = await SerializeService.Instance;
+
+            if (dto is null)
             {
                 result = await httpClientService.SendAsync(uri, httpMethod);
             }
             else
             {
-                var serializeDTO = SerializeService.Serialize<P>(dto);
+                
+                var serializeDTO = await serializer.Serialize<P>(dto);
                 result = await httpClientService.SendAsync(uri, httpMethod, serializeDTO);
             }                
              
             if (result.StatusCode == HttpStatusCode.OK || result.StatusCode == HttpStatusCode.Created)
             {
                 var content = await result.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<R>(content);
+                return  await serializer.Deserialize<R>(content);
             }
             else if(result.StatusCode == HttpStatusCode.NoContent)
             {
