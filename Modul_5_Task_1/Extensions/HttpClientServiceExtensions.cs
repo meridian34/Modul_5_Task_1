@@ -15,7 +15,7 @@ namespace Modul_5_Task_1.Extensions
 {
     public static class HttpClientServiceExtensions
     {
-        #region get
+        #region GET
         public static async Task<Page<IReadOnlyCollection<User>>> GetUserCollectionAsync(this IHttpClientService httpClientService, string request)
         {
             var result = await httpClientService.GetAsync(request);
@@ -81,7 +81,7 @@ namespace Modul_5_Task_1.Extensions
                 NullValueHandling = NullValueHandling.Ignore
             });
             var result = await httpClientService.PostAsync(uri,serializeUser);
-            if (result.StatusCode == HttpStatusCode.OK)
+            if (result.StatusCode == HttpStatusCode.OK || result.StatusCode == HttpStatusCode.Created)
             {
                 var content = await result.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<User>(content);
@@ -91,7 +91,7 @@ namespace Modul_5_Task_1.Extensions
                 throw new HttpRequestException("Bad StatusCode");
             }
         }
-        public static async Task<User> UserRegistrationAsync(this IHttpClientService httpClientService, string uri, RegistrationInfo registrationInfo)
+        public static async Task<RegisterResponse> UserRegistrationAsync(this IHttpClientService httpClientService, string uri, RegistrationInfo registrationInfo)
         {
             var serializeUser = JsonConvert.SerializeObject(registrationInfo, Formatting.Indented, new JsonSerializerSettings
             {
@@ -101,7 +101,24 @@ namespace Modul_5_Task_1.Extensions
             if (result.StatusCode == HttpStatusCode.OK)
             {
                 var content = await result.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<User>(content);
+                return JsonConvert.DeserializeObject<RegisterResponse>(content);
+            }
+            else
+            {
+                throw new HttpRequestException("Bad StatusCode");
+            }
+        }
+        public static async Task<RegisterResponse> LoginUserAsync(this IHttpClientService httpClientService, string uri, RegistrationInfo registrationInfo)
+        {   
+            var serializeUser = JsonConvert.SerializeObject(registrationInfo, Formatting.Indented, new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            });
+            var result = await httpClientService.PostAsync(uri, serializeUser);
+            if (result.StatusCode == HttpStatusCode.OK)
+            {
+                var content = await result.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<RegisterResponse>(content);
             }
             else
             {
@@ -129,7 +146,7 @@ namespace Modul_5_Task_1.Extensions
         }
         #endregion
         #region PATCH
-        public static async Task<User> Update2UserAsync(this IHttpClientService httpClientService, string uri, User user)
+        public static async Task<User> UpdateUserViaPatchAsync(this IHttpClientService httpClientService, string uri, User user)
         {
             var serializeUser = JsonConvert.SerializeObject(user, Formatting.Indented, new JsonSerializerSettings
             {

@@ -20,12 +20,15 @@ namespace Modul_5_Task_1
             //var t6 = client.GetResourceAsync(@"https://reqres.in/api/unknown/23");
             var t7 = client.CreateUserAsync(@"https://reqres.in/api/users", new User() { FirstName = "morpheus", Job = "leader" });
             var t8 = client.UpdateUserAsync(@"https://reqres.in/api/users/2", new User() { FirstName = "morpheus", Job = "zion resident" });
-            var t9 = client.Update2UserAsync(@"https://reqres.in/api/users/2", new User() { FirstName = "morpheus", Job = "zion resident" });
+            var t9 = client.UpdateUserViaPatchAsync(@"https://reqres.in/api/users/2", new User() { FirstName = "morpheus", Job = "zion resident" });
             var t10 = client.DeleteUserAsync(@"https://reqres.in/api/users/2");
             var t11 = client.UserRegistrationAsync(@"https://reqres.in/api/register", new RegistrationInfo() { Email = "eve.holt@reqres.in", Password = "pistol" });
-            var t12 = client.UserRegistrationAsync(@"https://reqres.in/api/register", new RegistrationInfo() { Email = "sydney@fife" });
-            
-            await Task.WhenAll(t1, t2, t4);
+            //var t12 = client.UserRegistrationAsync(@"https://reqres.in/api/register", new RegistrationInfo() { Email = "sydney@fife" });
+            var t13 = client.LoginUserAsync(@"https://reqres.in/api/login", new RegistrationInfo() { Email = "eve.holt@reqres.in", Password = "cityslicka" });
+            //var t14 = client.LoginUserAsync(@"https://reqres.in/api/register", new RegistrationInfo() { Email = "peter@klaven" });
+            var t15 = client.GetUserCollectionAsync(@"https://reqres.in/api/users?delay=3");
+            await Task.WhenAll(t1, t2, t4,t5,t7,t8,t9,t10,t11,t13,t15);
+            Console.WriteLine("Complited");
             Console.ReadKey();
         
 

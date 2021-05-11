@@ -22,8 +22,8 @@ namespace Modul_5_Task_1.Models.DTO
         [JsonProperty("job")]
         public string Job { get; set; }
         [JsonProperty("updatedAt")]
-        public TimeSpan? UpdatedAt { get; set; }
+        public DateTimeOffset? UpdatedAt { get; set; }
         [JsonProperty("createdAt")]
-        public TimeSpan? CreatedAt { get; set; }
+        public DateTimeOffset? CreatedAt { get; set; }
     }
 }
