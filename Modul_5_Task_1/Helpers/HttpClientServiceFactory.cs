@@ -1,17 +1,13 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System.IO;
+using Microsoft.Extensions.Configuration;
 using Modul_5_Task_1.Services;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Modul_5_Task_1.Services.Interfaces;
 
 namespace Modul_5_Task_1.Helpers
 {
-    class HttpClientServiceBuilder
+    public class HttpClientServiceFactory
     {
-        public HttpClientService Get()
+        public IHttpClientService Get()
         {
             var builder = new ConfigurationBuilder();
             builder.SetBasePath(Directory.GetCurrentDirectory());

@@ -1,10 +1,7 @@
-﻿using Modul_5_Task_1.Extensions;
-using Modul_5_Task_1.Models.DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
 using System.Threading.Tasks;
+using Modul_5_Task_1.Extensions;
+using Modul_5_Task_1.Models.DTO;
 
 namespace Modul_5_Task_1.Helpers
 {
@@ -14,7 +11,7 @@ namespace Modul_5_Task_1.Helpers
         {
             try
             {
-                var client = new HttpClientServiceBuilder().Get();
+                var client = new HttpClientServiceFactory().Get();
                 var t1 = client.GetUserAsync(@"https://reqres.in/api/users/2");
                 var t2 = client.GetUserCollectionAsync(@"https://reqres.in/api/users?page=2");
                 var t3 = client.GetUserAsync(@"https://reqres.in/api/users/23");
@@ -30,13 +27,12 @@ namespace Modul_5_Task_1.Helpers
                 var t13 = client.LoginUserAsync(@"https://reqres.in/api/login", new RegistrationInfo() { Email = "eve.holt@reqres.in", Password = "cityslicka" });
                 var t14 = client.LoginUserAsync(@"https://reqres.in/api/register", new RegistrationInfo() { Email = "peter@klaven" });
                 var t15 = client.GetUserCollectionAsync(@"https://reqres.in/api/users?delay=3");
-                await Task.WhenAll(t1, t2,t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t15);
+                await Task.WhenAll(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t15);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
             }
-            
         }
     }
 }
