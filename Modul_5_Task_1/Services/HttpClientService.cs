@@ -11,12 +11,6 @@ namespace Modul_5_Task_1.Services
         private readonly string _mediaFormat;
         private readonly Encoding _httpEncoding;
 
-        public HttpClientService(string mediaFormat, Encoding httpEncoding)
-        {
-            _mediaFormat = mediaFormat;
-            _httpEncoding = httpEncoding;
-        }
-
         public HttpClientService(string mediaFormat, string httpEncoding)
         {
             _mediaFormat = mediaFormat;

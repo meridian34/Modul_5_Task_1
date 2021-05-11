@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Modul_5_Task_1.Extensions;
 using Modul_5_Task_1.Models.DTO;
+using Modul_5_Task_1.Services;
 
 namespace Modul_5_Task_1.Helpers
 {
@@ -11,7 +12,7 @@ namespace Modul_5_Task_1.Helpers
         {
             try
             {
-                var client = new HttpClientServiceFactory().Get();
+                var client = LocatorService.HttpClientService;
                 var t1 = client.GetUserAsync(@"https://reqres.in/api/users/2");
                 var t2 = client.GetUserCollectionAsync(@"https://reqres.in/api/users?page=2");
                 var t3 = client.GetUserAsync(@"https://reqres.in/api/users/23");

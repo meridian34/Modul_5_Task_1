@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Modul_5_Task_1.Services.Interfaces;
 using Newtonsoft.Json;
@@ -8,11 +9,11 @@ namespace Modul_5_Task_1.Services
     public class SerializeService : ISerializeService
     {
         private readonly SemaphoreSlim _slim;
-        private static readonly Task<SerializeService> _instance;
+        private static readonly Lazy<SerializeService> _instance;
 
         static SerializeService()
         {
-            _instance = Initialization();
+            _instance = new Lazy<SerializeService>(() => new SerializeService());
         }
 
         private SerializeService()
@@ -20,9 +21,9 @@ namespace Modul_5_Task_1.Services
             _slim = new SemaphoreSlim(1);
         }
 
-        public static Task<SerializeService> Instance
+        public static SerializeService Instance
         {
-            get { return _instance; }
+            get { return _instance.Value; }
         }
 
         public async Task<string> Serialize<T>(T dto)
@@ -52,11 +53,6 @@ namespace Modul_5_Task_1.Services
             {
                 _slim.Release();
             }
-        }
-
-        private static async Task<SerializeService> Initialization()
-        {
-            return await Task.Run(() => new SerializeService());
         }
     }
 }

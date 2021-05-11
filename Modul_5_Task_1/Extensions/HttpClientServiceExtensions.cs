@@ -14,7 +14,7 @@ namespace Modul_5_Task_1.Extensions
             where TParam : class
         {
             HttpResponseMessage result;
-            var serializer = await SerializeService.Instance;
+            var serializer = LocatorService.SerializerService;
 
             if (dto is null)
             {
